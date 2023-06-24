@@ -45,4 +45,16 @@ public class ReportesController {
 
         return new ResponseEntity<>(visitasPorArea, HttpStatus.OK);
     }
+    @GetMapping("ContarVisitasPorPersonas")
+    public ResponseEntity<?> contarVisitasPorPersonas() {
+
+        Long alumnos;
+        Long personal;
+        Long externos;
+        Long total_visitas;
+
+        Map<String, Long> visitasPorPersonas = new HashMap<>();
+
+        return new ResponseEntity<>(visitasPorPersonas ,HttpStatus.OK);
+    }
 }
