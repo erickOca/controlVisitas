@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import utrng.control.visitas.model.repository.mysqlRepository.AlumnoVisitaRepository;
 import utrng.control.visitas.model.repository.mysqlRepository.ExternoRepository;
+import utrng.control.visitas.model.repository.sqlRepository.CarrerasCgutRepository;
+import utrng.control.visitas.service.sqlService.VisitasPorCarreraService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +26,12 @@ public class ReportesController {
 
     @Autowired
     private ExternoRepository externoRepository;
+
+    @Autowired
+    private CarrerasCgutRepository carrerasCgutRepository;
+
+    @Autowired
+    private VisitasPorCarreraService porCarreraService;
 
     @GetMapping("ContarVisitasPorArea")
     public ResponseEntity<?> contarVisitasPorArea() {
@@ -45,6 +53,21 @@ public class ReportesController {
 
         return new ResponseEntity<>(visitasPorArea, HttpStatus.OK);
     }
+/*    @GetMapping("ContarVisitasPorCarrera")
+    public ResponseEntity<?> contarVisitasPorCarrera() {
+
+        List<CarrerasCgut> carreraServiceAll = porCarreraService.findAll();
+        ResponseEntity<?>  total = contarVisitasPorArea();
+        List<VisitasPorCarreraResponse> VisitasPorCarrera ;
+
+
+
+
+        return new ResponseEntity<>(VisitasPorCarrera , HttpStatus.OK);
+    }
+
+ */
+    // pendiente de desarrollo
     @GetMapping("ContarVisitasPorPersonas")
     public ResponseEntity<?> contarVisitasPorPersonas() {
 
