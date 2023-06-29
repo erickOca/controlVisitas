@@ -7,6 +7,7 @@ import utrng.control.visitas.model.repository.mysqlRepository.IngresosEmpleadoRe
 import utrng.control.visitas.util.EntradaRequest;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Service
 public class IngresosEmpleadoServiceImpl implements IngresosEmpleadoService{
@@ -22,6 +23,14 @@ public class IngresosEmpleadoServiceImpl implements IngresosEmpleadoService{
         }else{
             System.out.println("No se pudo registrar visita");
         }
+    }
+
+    @Override
+    public long visitasEmpleado(Date fechaInicio, Date fechaFin) {
+        long a = ingresosEmpleadoRepository.countByOpcionWhereFecha(fechaInicio, fechaFin);
+        System.out.println("El numero de empleados son: " + a);
+
+        return a;
     }
 
 
