@@ -3,13 +3,13 @@ package utrng.control.visitas.util.response;
 public class CarreraResponse {
     String nombreCarrera;
 
-    long visitas;
+    Long visitas;
 
 
     public CarreraResponse() {
     }
 
-    public CarreraResponse(String nombreCarrera, long visitas) {
+    public CarreraResponse(String nombreCarrera, Long visitas) {
         this.nombreCarrera = nombreCarrera;
         this.visitas = visitas;
     }
@@ -22,12 +22,11 @@ public class CarreraResponse {
         this.nombreCarrera = nombreCarrera;
     }
 
-    public long getVisitas() {
+    public Long getVisitas() {
         return visitas;
     }
 
-    public void setVisitas(long visitas) {
+    public void setVisitas(Long visitas) {
         this.visitas = visitas;
     }
-
 }

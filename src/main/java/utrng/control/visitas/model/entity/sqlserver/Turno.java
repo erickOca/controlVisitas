@@ -54,4 +54,13 @@ public class Turno {
         this.duracion = duracion;
     }
 
+    @Override
+    public String toString() {
+        return "Turno{" +
+                "id=" + id +
+                ", descripcion='" + descripcion + '\'' +
+                ", activo=" + activo +
+                ", duracion=" + duracion +
+                '}';
+    }
 }

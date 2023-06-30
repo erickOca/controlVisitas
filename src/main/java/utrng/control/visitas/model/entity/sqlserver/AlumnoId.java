@@ -19,6 +19,7 @@ public class AlumnoId implements Serializable {
     @Column(name = "cve_universidad", nullable = false)
     private Integer cveUniversidad;
 
+
     public Integer getCveAlumno() {
         return cveAlumno;
     }
@@ -41,7 +42,7 @@ public class AlumnoId implements Serializable {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         AlumnoId entity = (AlumnoId) o;
         return Objects.equals(this.cveUniversidad, entity.cveUniversidad) &&
-                Objects.equals(this.cveAlumno, entity.cveAlumno);
+                Objects.equals(this.cveAlumno, entity.cveAlumno) ;
     }
 
     @Override

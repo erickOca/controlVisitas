@@ -29,6 +29,11 @@ public interface AlumnoVisitaRepository extends JpaRepository<Alumnovisita,Integ
     @Query("SELECT COUNT(av) FROM Alumnovisita av WHERE DAYOFWEEK(av.fecha) BETWEEN 2 AND 6")
     Long countVisitasByWeekdays();
 
+    @Query("SELECT COUNT(av) FROM Alumnovisita av WHERE av.turno LIKE '%tsu%' AND av.fecha BETWEEN :fechaIncicio AND :fechaFin")
+    Long countByTurnoWhereTsuAndFechaBetween( @Param("fechaIncicio") Date fechaIncicio, @Param("fechaFin") Date fechaFin);
 
+
+    @Query("SELECT COUNT(av) FROM Alumnovisita av WHERE av.turno LIKE '%lic%'")
+    Long countByTurnoWhereIng();
 
 }

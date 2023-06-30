@@ -40,6 +40,7 @@ public class AlumnoController {
             alumnovisita.setFecha(fecha);
             alumnovisita.setOpcion(opcion);
             alumnovisita.setMotivo(motivo);
+            alumnovisita.setTurno(response.getTurno().getDescripcion());
 
             alumnoVisitaRepository.save(alumnovisita);
 

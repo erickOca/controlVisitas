@@ -22,6 +22,10 @@ public class Alumno {
     @JoinColumn(name = "cve_carrera")
     private  CarrerasCgut carrerasCgut;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cve_turno", referencedColumnName = "cve_turno", insertable = false, updatable = false)
+    @JoinColumn(name = "cve_universidad", referencedColumnName = "cve_universidad", insertable = false, updatable = false)
+    private Turno turno;
 
 
     public AlumnoId getId() {
@@ -54,5 +58,13 @@ public class Alumno {
 
     public void setCarrerasCgut(CarrerasCgut carrerasCgut) {
         this.carrerasCgut = carrerasCgut;
+    }
+
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
     }
 }

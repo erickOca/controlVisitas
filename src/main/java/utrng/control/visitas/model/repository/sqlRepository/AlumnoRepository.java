@@ -11,4 +11,7 @@ public interface AlumnoRepository extends JpaRepository<Alumno,Integer > {
 
     @Query("SELECT a, a.carrerasCgut FROM Alumno a JOIN FETCH a.carrerasCgut c WHERE a.matricula = :matriculaAlumno")
     Alumno findAlumnoByMatricula(@Param("matriculaAlumno") String matriculaAlumno);
+
+    @Query("SELECT a.turno.id.cveTurno FROM Alumno a WHERE a.matricula = :matriculaAlumno")
+    Long findCveTurnoByMatricula(@Param("matriculaAlumno") String matriculaAlumno);
 }

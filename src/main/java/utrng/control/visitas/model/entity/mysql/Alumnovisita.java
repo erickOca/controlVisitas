@@ -47,6 +47,10 @@ public class Alumnovisita {
     @Column(name = "motivo", length = 100)
     private String motivo;
 
+    @Size(max = 100)
+    @Column(name = "turno", length = 100)
+    private String turno ;
+
     public Integer getId() {
         return id;
     }
@@ -133,5 +137,13 @@ public class Alumnovisita {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
     }
 }

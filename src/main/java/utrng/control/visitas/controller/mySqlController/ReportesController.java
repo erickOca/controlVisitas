@@ -6,8 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utrng.control.visitas.model.entity.mysql.Alumnovisita;
+import utrng.control.visitas.model.entity.sqlserver.Alumno;
+import utrng.control.visitas.model.entity.sqlserver.Turno;
 import utrng.control.visitas.model.repository.mysqlRepository.AlumnoVisitaRepository;
 import utrng.control.visitas.model.repository.mysqlRepository.ExternoRepository;
+import utrng.control.visitas.model.repository.sqlRepository.AlumnoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.CarrerasCgutRepository;
 import utrng.control.visitas.service.mySqlService.IngresosEmpleadoServiceImpl;
 import utrng.control.visitas.service.sqlService.AlumnoServiceImpl;
@@ -15,6 +18,7 @@ import utrng.control.visitas.service.sqlService.VisitasPorCarreraService;
 import utrng.control.visitas.util.FechaRequest;
 import utrng.control.visitas.util.response.CarreraResponse;
 import utrng.control.visitas.util.response.GlobalResponse;
+import utrng.control.visitas.util.response.NivelResponse;
 import utrng.control.visitas.util.response.TurnosResponse;
 
 import java.time.DayOfWeek;
@@ -44,6 +48,9 @@ public class ReportesController {
 
     @Autowired
     private IngresosEmpleadoServiceImpl ingresosEmpleadoService;
+
+    @Autowired
+    private AlumnoRepository alumnoRepository;
 
     @GetMapping("ContarVisitasPorArea")
     public ResponseEntity<?> contarVisitasPorArea() {
@@ -118,6 +125,22 @@ public class ReportesController {
     }
 
 
+    @PostMapping("/ContarVisitasPorAlumnosNivel")
+    public ResponseEntity<List<NivelResponse>> contarVisitasPorAlumnosNivelX(@RequestBody FechaRequest request){
+        List<NivelResponse> carreraResponses = new ArrayList<>();
+        Long a = repository.countByTurnoWhereTsuAndFechaBetween(request.getFechaInicio(), request.getFechaFinal());
+        Long b = repository.countByTurnoWhereIng();
+
+        NivelResponse responseTsu = new NivelResponse("Tecnico Superior Universitatio", a);
+        NivelResponse responseLic = new NivelResponse("Ingenieria y Licenciatura", b);
+        NivelResponse responseTotal = new NivelResponse("Total de Visitas Por Niveles", a + b);
+
+        carreraResponses.add(responseTsu);
+        carreraResponses.add(responseLic);
+        carreraResponses.add(responseTotal);
+
+        return ResponseEntity.ok(carreraResponses);
+    }
 
 
 
