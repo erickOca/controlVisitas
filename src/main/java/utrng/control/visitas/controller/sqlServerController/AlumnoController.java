@@ -7,9 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import utrng.control.visitas.model.entity.mysql.Alumnovisita;
 import utrng.control.visitas.model.entity.sqlserver.Alumno;
 import utrng.control.visitas.model.repository.mysqlRepository.AlumnoVisitaRepository;
+import utrng.control.visitas.model.repository.sqlRepository.AlumnoRepository;
 import utrng.control.visitas.service.sqlService.AlumnoService;
+import utrng.control.visitas.util.FechaRequest;
+import utrng.control.visitas.util.response.NivelResponse;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -21,6 +25,9 @@ public class AlumnoController {
 
     @Autowired
     private AlumnoVisitaRepository alumnoVisitaRepository;
+
+    @Autowired
+    private AlumnoRepository repository;
 
     @PostMapping("FindByAlumno/{matriculaAlumno}")
     public ResponseEntity<?> buscarMatricula(@PathVariable("matriculaAlumno") String matriculaAlumno,
@@ -49,4 +56,5 @@ public class AlumnoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 }

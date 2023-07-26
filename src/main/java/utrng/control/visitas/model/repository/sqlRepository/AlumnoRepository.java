@@ -14,4 +14,5 @@ public interface AlumnoRepository extends JpaRepository<Alumno,Integer > {
 
     @Query("SELECT a.turno.id.cveTurno FROM Alumno a WHERE a.matricula = :matriculaAlumno")
     Long findCveTurnoByMatricula(@Param("matriculaAlumno") String matriculaAlumno);
+
 }

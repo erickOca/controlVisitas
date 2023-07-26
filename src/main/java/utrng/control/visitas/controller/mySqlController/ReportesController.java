@@ -7,19 +7,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utrng.control.visitas.model.entity.mysql.Alumnovisita;
 import utrng.control.visitas.model.entity.sqlserver.Alumno;
+import utrng.control.visitas.model.entity.sqlserver.Persona;
 import utrng.control.visitas.model.entity.sqlserver.Turno;
 import utrng.control.visitas.model.repository.mysqlRepository.AlumnoVisitaRepository;
 import utrng.control.visitas.model.repository.mysqlRepository.ExternoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.AlumnoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.CarrerasCgutRepository;
+import utrng.control.visitas.model.repository.sqlRepository.PersonaRepository;
 import utrng.control.visitas.service.mySqlService.IngresosEmpleadoServiceImpl;
 import utrng.control.visitas.service.sqlService.AlumnoServiceImpl;
 import utrng.control.visitas.service.sqlService.VisitasPorCarreraService;
 import utrng.control.visitas.util.FechaRequest;
-import utrng.control.visitas.util.response.CarreraResponse;
-import utrng.control.visitas.util.response.GlobalResponse;
-import utrng.control.visitas.util.response.NivelResponse;
-import utrng.control.visitas.util.response.TurnosResponse;
+import utrng.control.visitas.util.response.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -51,6 +50,9 @@ public class ReportesController {
 
     @Autowired
     private AlumnoRepository alumnoRepository;
+
+    @Autowired
+    private PersonaRepository personaRepository;
 
     @GetMapping("ContarVisitasPorArea")
     public ResponseEntity<?> contarVisitasPorArea() {
@@ -140,6 +142,73 @@ public class ReportesController {
         carreraResponses.add(responseTotal);
 
         return ResponseEntity.ok(carreraResponses);
+    }
+
+    @PostMapping("/ContarVisitasPorAlumnosExpesifica")
+    public ResponseEntity<List<Alumnovisita>> ContarVisitasPorAlumnosExpesifica(String turno, String carrera){
+        List<Alumnovisita> alumnovisitas = new ArrayList<>();
+        alumnovisitas = repository.findByGradoTurnoCarrera(turno, carrera);
+
+        return new ResponseEntity<>(alumnovisitas ,HttpStatus.OK);
+    }
+// Reporte de Externo
+    @GetMapping("/ContarVisitasPorExternoArea")
+    public ResponseEntity<List<ExternoRespose>> ContarVisitasPorExternoArea(){
+        List<Object[]> resultList = externoRepository.countByOpcion();
+        List<ExternoRespose> list = new ArrayList<>();
+        long total = 0L;
+
+        for (Object[] result : resultList) {
+            String nombre = (String) result[0]; // Supongamos que el nombre está en la posición 0 del arreglo
+            Long visitas = (Long) result[1]; // Supongamos que las visitas están en la posición 1 del arreglo
+
+            ExternoRespose externoRespose = new ExternoRespose();
+            externoRespose.setNombre(nombre);
+            externoRespose.setVisitas(visitas);
+
+            list.add(externoRespose);
+
+            total += visitas;
+        }
+
+        ExternoRespose externoResposeTotales = new ExternoRespose();
+        externoResposeTotales.setVisitas(total);
+        externoResposeTotales.setNombre("Visitas Totales");
+
+        list.add(externoResposeTotales);
+
+        System.out.println("Total de visitas: " + externoResposeTotales);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+    @GetMapping("/ContarVisitasPorExternoInstitucion")
+    public ResponseEntity<List<ExternoRespose>> ContarVisitasPorExternoInstitucion() {
+        List<Object[]> resultList = externoRepository.countByNombreInstitucion();
+        List<ExternoRespose> list = new ArrayList<>();
+        long total = 0L;
+
+        for (Object[] result : resultList) {
+            String nombre = (String) result[0]; // Supongamos que el nombre está en la posición 0 del arreglo
+            Long visitas = (Long) result[1]; // Supongamos que las visitas están en la posición 1 del arreglo
+
+            ExternoRespose externoRespose = new ExternoRespose();
+            externoRespose.setNombre(nombre);
+            externoRespose.setVisitas(visitas);
+
+            list.add(externoRespose);
+
+            total += visitas;
+        }
+
+        // Agregar objeto ExternoRespose adicional para representar el total de visitas
+        ExternoRespose externoResposeTotales = new ExternoRespose();
+        externoResposeTotales.setVisitas(total);
+        externoResposeTotales.setNombre("Visitas Totales");
+
+        list.add(externoResposeTotales);
+
+        System.out.println("Total de visitas: " + total);
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
 

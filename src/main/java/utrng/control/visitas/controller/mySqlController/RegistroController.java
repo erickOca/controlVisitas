@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import utrng.control.visitas.model.entity.sqlserver.Persona;
+import utrng.control.visitas.model.repository.sqlRepository.PersonaRepository;
 import utrng.control.visitas.service.mySqlService.IngresosEmpleadoService;
 import utrng.control.visitas.util.EntradaRequest;
 
@@ -16,6 +18,9 @@ public class RegistroController {
 
     @Autowired
     IngresosEmpleadoService ingresosEmpleadoService;
+
+    @Autowired
+    PersonaRepository personaRepository;
 
     @PostMapping("registrarEntrada")
     public ResponseEntity<?> registrarEntrada(@RequestBody EntradaRequest request){

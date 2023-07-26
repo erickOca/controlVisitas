@@ -11,13 +11,8 @@ public class IngresosEmpleado {
     @Column(name = "idIngreso",nullable = false)
     private int id;
 
-  /*  @ManyToOne
-    @JoinColumn(name = "idEmpleado")
-     */
   @Column(name = "empleado_id",nullable = false)
     private Integer idEmpleado;
-
-
 
     @Column(name = "hora_entrada",nullable = false)
     private Timestamp horaEntrada;

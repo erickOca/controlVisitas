@@ -19,30 +19,12 @@ public class Persona {
     @Column(name = "apellido_mat")
     private String apellidoMaterno;
 
- /*   @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "cve_tipo_persona")
     private TipoPersona tipoPersona;
-  */
-
-    @Column(name = "rfc")
-    private String rfc;
-
-
-    @Column(name = "curp")
-    private String curp;
 
     @Column(name = "sexo")
     private String sexo;
-
-
-    @Column(name = "fam_diabetico")
-    private Boolean familiarDiabetico;
-
-    @Column(name = "fam_hipertenso")
-    private Boolean familiarHipertenso;
-
-    @Column(name = "fam_cardiaco")
-    private Boolean familiarCardiaco;
 
     @Column(name = "es_madre")
     private Boolean esMadre;
@@ -50,10 +32,86 @@ public class Persona {
     @Column(name = "es_sindicalizado")
     private Boolean esSindicalizado;
 
-    @Column(name = "discapacidad")
-    private Boolean discapacidad;
-
 
     // Constructor, getters, and setters
+
+
+    public Persona() {
+    }
+
+    public Persona(Integer cvePersona, String nombre, String apellidoPaterno, String apellidoMaterno, TipoPersona tipoPersona, String sexo, Boolean esMadre, Boolean esSindicalizado) {
+        this.cvePersona = cvePersona;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.tipoPersona = tipoPersona;
+        this.sexo = sexo;
+        this.esMadre = esMadre;
+        this.esSindicalizado = esSindicalizado;
+    }
+
+    public Integer getCvePersona() {
+        return cvePersona;
+    }
+
+    public void setCvePersona(Integer cvePersona) {
+        this.cvePersona = cvePersona;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public TipoPersona getTipoPersona() {
+        return tipoPersona;
+    }
+
+    public void setTipoPersona(TipoPersona tipoPersona) {
+        this.tipoPersona = tipoPersona;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public Boolean getEsMadre() {
+        return esMadre;
+    }
+
+    public void setEsMadre(Boolean esMadre) {
+        this.esMadre = esMadre;
+    }
+
+    public Boolean getEsSindicalizado() {
+        return esSindicalizado;
+    }
+
+    public void setEsSindicalizado(Boolean esSindicalizado) {
+        this.esSindicalizado = esSindicalizado;
+    }
 }
 

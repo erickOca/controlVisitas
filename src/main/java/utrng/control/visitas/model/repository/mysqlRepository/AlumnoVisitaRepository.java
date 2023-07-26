@@ -36,4 +36,7 @@ public interface AlumnoVisitaRepository extends JpaRepository<Alumnovisita,Integ
     @Query("SELECT COUNT(av) FROM Alumnovisita av WHERE av.turno LIKE '%lic%'")
     Long countByTurnoWhereIng();
 
+    @Query("SELECT av FROM Alumnovisita av WHERE av.gradoActual = 5 AND av.turno LIKE %:turno% AND av.nombreCarrera LIKE %:carrera%")
+    List<Alumnovisita> findByGradoTurnoCarrera(@Param("turno") String turno, @Param("carrera") String carrera);
+
 }

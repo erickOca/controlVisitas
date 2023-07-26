@@ -51,6 +51,7 @@ public class Alumnovisita {
     @Column(name = "turno", length = 100)
     private String turno ;
 
+
     public Integer getId() {
         return id;
     }
@@ -146,4 +147,6 @@ public class Alumnovisita {
     public void setTurno(String turno) {
         this.turno = turno;
     }
+
+
 }

@@ -30,7 +30,6 @@ public class GrupoId implements Serializable {
     @NotNull
     @Column(name = "cve_division", nullable = false)
     private Integer cveDivision;
-
     @NotNull
     @Column(name = "cve_unidad_academica", nullable = false)
     private Integer cveUnidadAcademica;

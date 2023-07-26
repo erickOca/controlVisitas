@@ -12,7 +12,7 @@ public class Externovisita {
     @Column(name = "idExternoVisita", nullable = false)
     private Integer id;
 
-    @Size(max = 45)
+    @Size(max = 100)
     @Column(name = "nombreInstitucion", length = 45)
     private String nombreInstitucion;
 
