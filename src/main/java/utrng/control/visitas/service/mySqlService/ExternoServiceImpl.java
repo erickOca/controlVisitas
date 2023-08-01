@@ -1,6 +1,7 @@
 package utrng.control.visitas.service.mySqlService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import utrng.control.visitas.model.entity.mysql.Externovisita;
 import utrng.control.visitas.model.repository.mysqlRepository.ExternoRepository;
@@ -37,11 +38,11 @@ public class ExternoServiceImpl implements ExternoService{
     }
 
     @Override
-    public ExternoRespose ContarVisitasPorExternoInstitucion() {
+    public ExternoRespose ContarVisitasPorExternoInstitucion(Date fechaInicio, Date fechaFin) {
        // List<Object[]>
         List<Object[]> list = new ArrayList<>();
 
-        list = externoRepository.countByNombreInstitucion();
+        list = externoRepository.countByNombreInstitucion(fechaInicio, fechaFin);
         Long total = 0l;
         for (Object[] result : list) {
             ExternoRespose externoRespose = new ExternoRespose();

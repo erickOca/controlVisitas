@@ -2,11 +2,13 @@ package utrng.control.visitas.controller.mySqlController;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utrng.control.visitas.model.entity.mysql.Alumnovisita;
 import utrng.control.visitas.model.entity.sqlserver.Alumno;
+import utrng.control.visitas.model.entity.sqlserver.CarrerasCgut;
 import utrng.control.visitas.model.entity.sqlserver.Persona;
 import utrng.control.visitas.model.entity.sqlserver.Turno;
 import utrng.control.visitas.model.repository.mysqlRepository.AlumnoVisitaRepository;
@@ -152,9 +154,9 @@ public class ReportesController {
         return new ResponseEntity<>(alumnovisitas ,HttpStatus.OK);
     }
 // Reporte de Externo
-    @GetMapping("/ContarVisitasPorExternoArea")
-    public ResponseEntity<List<ExternoRespose>> ContarVisitasPorExternoArea(){
-        List<Object[]> resultList = externoRepository.countByOpcion();
+    @PostMapping("/ContarVisitasPorExternoArea")
+    public ResponseEntity<List<ExternoRespose>> ContarVisitasPorExternoArea(@RequestBody FechaRequest request){
+        List<Object[]> resultList = externoRepository.countByOpcion(request.getFechaInicio(), request.getFechaFinal());
         List<ExternoRespose> list = new ArrayList<>();
         long total = 0L;
 
@@ -180,9 +182,9 @@ public class ReportesController {
         System.out.println("Total de visitas: " + externoResposeTotales);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-    @GetMapping("/ContarVisitasPorExternoInstitucion")
-    public ResponseEntity<List<ExternoRespose>> ContarVisitasPorExternoInstitucion() {
-        List<Object[]> resultList = externoRepository.countByNombreInstitucion();
+    @PostMapping("/ContarVisitasPorExternoInstitucion")
+    public ResponseEntity<List<ExternoRespose>> ContarVisitasPorExternoInstitucion(@RequestBody FechaRequest request) {
+        List<Object[]> resultList = externoRepository.countByNombreInstitucion(request.getFechaInicio(), request.getFechaFinal());
         List<ExternoRespose> list = new ArrayList<>();
         long total = 0L;
 
@@ -210,6 +212,14 @@ public class ReportesController {
 
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+// Reportes de divicion
+@PostMapping("/ContarVisitasPorDivisiones")
+public ResponseEntity<List<CarrerasCgut>> ContarVisitasPorDivisiones(byte a) {
+    List<CarrerasCgut> list = carrerasCgutRepository.findByActivo(a);
+
+
+    return new ResponseEntity<>(list, HttpStatus.OK);
+}
 
 
 

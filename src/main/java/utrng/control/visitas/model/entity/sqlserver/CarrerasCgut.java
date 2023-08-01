@@ -23,6 +23,10 @@ public class CarrerasCgut {
     @Column(name = "abreviatura", length = 20)
     private String abreviatura;
 
+    @Column(name = "activo")
+    private byte activo ;
+
+
 
 
     public Integer getId() {
@@ -41,8 +45,6 @@ public class CarrerasCgut {
         this.nombre = nombre;
     }
 
-
-
     public String getAbreviatura() {
         return abreviatura;
     }
@@ -51,6 +53,11 @@ public class CarrerasCgut {
         this.abreviatura = abreviatura;
     }
 
+    public byte getActivo() {
+        return activo;
+    }
 
-
+    public void setActivo(byte activo) {
+        this.activo = activo;
+    }
 }
