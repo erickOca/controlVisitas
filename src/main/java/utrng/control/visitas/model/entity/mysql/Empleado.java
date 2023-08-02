@@ -8,11 +8,6 @@ import javax.validation.constraints.Size;
 public class Empleado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idEmpleado",nullable = false)
-    private Integer idEmpleado;
-
-    @Size(max = 50)
     @Column(name = "numEmpleado", nullable = false)
     private String numEmpleado;
 
@@ -38,13 +33,6 @@ public class Empleado {
         this.area = area;
     }
 
-    public Integer getIdEmpleado() {
-        return idEmpleado;
-    }
-
-    public void setIdEmpleado(Integer idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
 
     public String getNumEmpleado() {
         return numEmpleado;

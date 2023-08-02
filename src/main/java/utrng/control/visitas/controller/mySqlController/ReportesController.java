@@ -9,6 +9,7 @@ import utrng.control.visitas.model.entity.mysql.Alumnovisita;
 import utrng.control.visitas.model.entity.sqlserver.CarrerasCgut;
 import utrng.control.visitas.model.repository.mysqlRepository.AlumnoVisitaRepository;
 import utrng.control.visitas.model.repository.mysqlRepository.EmpleadoRepository;
+import utrng.control.visitas.model.repository.mysqlRepository.EmpleadoVisitaRepository;
 import utrng.control.visitas.model.repository.mysqlRepository.ExternoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.AlumnoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.CarrerasCgutRepository;
@@ -50,8 +51,6 @@ public class ReportesController {
     @Autowired
     private PersonaRepository personaRepository;
 
-    @Autowired
-    EmpleadoRepository empleadoRepository;
 
     @GetMapping("ContarVisitasPorArea")
     public ResponseEntity<?> contarVisitasPorArea() {
@@ -61,9 +60,7 @@ public class ReportesController {
         // Externo
         Long visitasComputoExternos = externoRepository.countByOpcion("Area de computo");
         Long visitasLibrosExternos = externoRepository.countByOpcion("Area de libros");
-        // Empleados
-      //  Long visitasComputoEmpleado = empleadoRepository. ;
-      //  Long visitasLibrosEmpleados = empleadoRepository ;
+
 
         Long totalComputo = visitasComputo + visitasComputoExternos;
         Long totalLibros = visitasLibros + visitasLibrosExternos;

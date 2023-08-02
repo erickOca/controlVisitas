@@ -12,8 +12,10 @@ import utrng.control.visitas.model.repository.sqlRepository.PersonaRepository;
 
 @RestController
 @RequestMapping("/emple")
+
+
 @CrossOrigin(origins = "*")
-public class EmpleadoController {
+public class PersonaController {
 
     @Autowired
     PersonaRepository personaRepository;

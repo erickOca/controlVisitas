@@ -4,9 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class EntradaRequest {
-    Integer idEmpleado;
-
-    Timestamp fechaEntrada;
+    String numEmpleado;
 
     String areaVisitada;
 
@@ -16,19 +14,6 @@ public class EntradaRequest {
     public EntradaRequest() {
     }
 
-    public EntradaRequest(Timestamp fechaEntrada, String areaVisitada, String motivo) {
-        this.fechaEntrada = fechaEntrada;
-        this.areaVisitada = areaVisitada;
-        this.motivo = motivo;
-    }
-
-    public Timestamp getFechaEntrada() {
-        return fechaEntrada;
-    }
-
-    public void setFechaEntrada(Timestamp fechaEntrada) {
-        this.fechaEntrada = fechaEntrada;
-    }
 
     public String getAreaVisitada() {
         return areaVisitada;
@@ -46,11 +31,11 @@ public class EntradaRequest {
         this.motivo = motivo;
     }
 
-    public Integer getIdEmpleado() {
-        return idEmpleado;
+    public String getNumEmpleado() {
+        return numEmpleado;
     }
 
-    public void setIdEmpleado(Integer idEmpleado) {
-        this.idEmpleado = idEmpleado;
+    public void setNumEmpleado(String numEmpleado) {
+        this.numEmpleado = numEmpleado;
     }
 }

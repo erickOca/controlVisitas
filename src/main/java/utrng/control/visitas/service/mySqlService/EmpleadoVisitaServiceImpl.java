@@ -2,6 +2,9 @@ package utrng.control.visitas.service.mySqlService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import utrng.control.visitas.model.entity.mysql.Empleado;
+import utrng.control.visitas.model.entity.mysql.EmpleadoVisita;
+import utrng.control.visitas.model.repository.mysqlRepository.EmpleadoRepository;
 import utrng.control.visitas.model.repository.mysqlRepository.EmpleadoVisitaRepository;
 import utrng.control.visitas.util.EntradaRequest;
 
@@ -13,17 +16,22 @@ public class EmpleadoVisitaServiceImpl implements EmpleadoVisitaService {
 
     @Autowired
     EmpleadoVisitaRepository ingresosEmpleadoRepository;
+    @Autowired
+    EmpleadoRepository empleadoRepository;
     @Override
     public void registroEntraEmpleado(EntradaRequest request) {
-      /*   if (notnull(request.getIdEmpleado(),request.getFechaEntrada(),request.getAreaVisitada())){
-            IngresosEmpleado empleado = new IngresosEmpleado(request.getIdEmpleado(), request.getFechaEntrada(), request.getAreaVisitada(), request.getMotivo());
+       Empleado byNumEmpleado = empleadoRepository.findByNumEmpleado(request.getNumEmpleado());
+
+        Date fecha = new Date();
+        if (notnull(byNumEmpleado, fecha,request.getAreaVisitada())){
+            EmpleadoVisita empleado = new EmpleadoVisita(byNumEmpleado, fecha , request.getAreaVisitada(), request.getMotivo());
             ingresosEmpleadoRepository.save(empleado);
             System.out.println("Se registro nueva visita " + empleado.toString());
         }else{
             System.out.println("No se pudo registrar visita");
         }
 
-       */
+
     }
 
     @Override
@@ -35,11 +43,11 @@ public class EmpleadoVisitaServiceImpl implements EmpleadoVisitaService {
     }
 
 
-    public boolean notnull(Integer empleadoId, Timestamp hora, String areaVisitada){
-        if (empleadoId == null){
+    public boolean notnull(Empleado empleado, Date fecha, String areaVisitada){
+        if (empleado == null){
             return false;
         }
-        if (hora == null){
+        if (fecha == null){
             return false;
         }
         if (areaVisitada == null){

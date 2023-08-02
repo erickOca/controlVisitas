@@ -17,10 +17,10 @@ public interface ExternoRepository extends JpaRepository<ExternoVisita, Integer>
    @Query("SELECT COUNT(a) FROM ExternoVisita a WHERE a.fecha BETWEEN :fechaInicio AND :fechaFin")
     Integer countByOpcionWhereFecha(@Param("fechaInicio") Date fechaInicio, @Param("fechaFin") Date fechaFin);
 
-    @Query("SELECT a.opcion, COUNT(*) AS cantidad FROM ExternoVisita a GROUP BY a.opcion")
+    @Query("SELECT a.opcion, COUNT(*) AS cantidad FROM ExternoVisita  a GROUP BY a.opcion")
     List<Object[]> countByOpcion(@Param("fechaInicio") Date fechaInicio, @Param("fechaFin") Date fechaFin);
 
-    @Query("SELECT a.nombreInstitucion, COUNT(*) AS cantidad FROM ExternoVisita a WHERE a.fecha BETWEEN :fechaInicio AND :fechaFin GROUP BY a.nombreInstitucion")
+    @Query("SELECT a.nombreInstitucion, COUNT(*) AS cantidad FROM ExternoVisita  a WHERE a.fecha BETWEEN :fechaInicio AND :fechaFin GROUP BY a.nombreInstitucion")
     List<Object[]> countByNombreInstitucion(@Param("fechaInicio") Date fechaInicio, @Param("fechaFin") Date fechaFin);
 
 }

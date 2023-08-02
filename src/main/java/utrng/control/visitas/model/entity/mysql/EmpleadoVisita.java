@@ -2,6 +2,7 @@ package utrng.control.visitas.model.entity.mysql;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "empleadovisita")
@@ -12,11 +13,11 @@ public class EmpleadoVisita {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "empleado_id", referencedColumnName = "idEmpleado", nullable = false)
+    @JoinColumn(name = "numEmpleado", referencedColumnName = "numEmpleado", nullable = false)
     private Empleado empleado;
 
     @Column(name = "hora_entrada",nullable = false)
-    private Timestamp horaEntrada;
+    private Date horaEntrada;
 
     @Column(name = "area_visitada",nullable = false)
     private String areaVisitada;
@@ -29,7 +30,7 @@ public class EmpleadoVisita {
     public EmpleadoVisita() {
     }
 
-    public EmpleadoVisita(Empleado empleado, Timestamp horaEntrada, String areaVisitada, String motivo) {
+    public EmpleadoVisita(Empleado empleado, Date horaEntrada, String areaVisitada, String motivo) {
         this.empleado = empleado;
         this.horaEntrada = horaEntrada;
         this.areaVisitada = areaVisitada;
@@ -44,7 +45,7 @@ public class EmpleadoVisita {
         this.id = id;
     }
 
-    public Timestamp getHoraEntrada() {
+    public Date getHoraEntrada() {
         return horaEntrada;
     }
 
