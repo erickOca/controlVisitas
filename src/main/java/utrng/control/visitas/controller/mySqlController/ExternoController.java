@@ -17,7 +17,7 @@ public class ExternoController {
     private ExternoService service;
 
     @PostMapping("saveExterno")
-    public ResponseEntity<?> buscarMatricula(@RequestBody ExternoRequest request) {
+    public ResponseEntity<?> saveExterno(@RequestBody ExternoRequest request) {
 
         Externovisita response = service.saveExterno(request);
         return ResponseEntity.ok(response);

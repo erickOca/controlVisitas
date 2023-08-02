@@ -4,15 +4,16 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "ingresos_empleado")
-public class IngresosEmpleado {
+@Table(name = "empleadovisita")
+public class Empleadovisita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idIngreso",nullable = false)
     private int id;
 
-  @Column(name = "empleado_id",nullable = false)
-    private Integer idEmpleado;
+    @ManyToOne
+    @JoinColumn(name = "empleado_id", referencedColumnName = "idEmpleado", nullable = false)
+    private Empleado empleado;
 
     @Column(name = "hora_entrada",nullable = false)
     private Timestamp horaEntrada;
@@ -25,11 +26,11 @@ public class IngresosEmpleado {
 
     // Constructor, getters y setters
 
-    public IngresosEmpleado() {
+    public Empleadovisita() {
     }
 
-    public IngresosEmpleado(Integer idEmpleado, Timestamp horaEntrada, String areaVisitada, String motivo) {
-        this.idEmpleado = idEmpleado;
+    public Empleadovisita(Empleado empleado, Timestamp horaEntrada, String areaVisitada, String motivo) {
+        this.empleado = empleado;
         this.horaEntrada = horaEntrada;
         this.areaVisitada = areaVisitada;
         this.motivo = motivo;
@@ -65,7 +66,7 @@ public class IngresosEmpleado {
     @Override
     public String toString() {
         return "Ingreso Empleado{" +
-                "idEmpleado=" + idEmpleado +
+                "idEmpleado=" + empleado +
                 ", horaEntrada=" + horaEntrada +
                 ", areaVisitada='" + areaVisitada + '\'' +
                 '}';

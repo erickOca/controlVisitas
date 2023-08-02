@@ -12,6 +12,7 @@ import utrng.control.visitas.model.entity.sqlserver.CarrerasCgut;
 import utrng.control.visitas.model.entity.sqlserver.Persona;
 import utrng.control.visitas.model.entity.sqlserver.Turno;
 import utrng.control.visitas.model.repository.mysqlRepository.AlumnoVisitaRepository;
+import utrng.control.visitas.model.repository.mysqlRepository.EmpleadoRepository;
 import utrng.control.visitas.model.repository.mysqlRepository.ExternoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.AlumnoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.CarrerasCgutRepository;
@@ -56,12 +57,20 @@ public class ReportesController {
     @Autowired
     private PersonaRepository personaRepository;
 
+    @Autowired
+    EmpleadoRepository empleadoRepository;
+
     @GetMapping("ContarVisitasPorArea")
     public ResponseEntity<?> contarVisitasPorArea() {
+        // Alumnos
         Long visitasComputo = repository.countByOpcion("Area de computo");
         Long visitasLibros = repository.countByOpcion("Area de libros");
+        // Externo
         Long visitasComputoExternos = externoRepository.countByOpcion("Area de computo");
         Long visitasLibrosExternos = externoRepository.countByOpcion("Area de libros");
+        // Empleados
+      //  Long visitasComputoEmpleado = empleadoRepository. ;
+      //  Long visitasLibrosEmpleados = empleadoRepository ;
 
         Long totalComputo = visitasComputo + visitasComputoExternos;
         Long totalLibros = visitasLibros + visitasLibrosExternos;
@@ -77,7 +86,7 @@ public class ReportesController {
         return new ResponseEntity<>(visitasPorArea, HttpStatus.OK);
     }
 
-    @PostMapping("ContarVisitasPorCarreraPorFecha")
+    @PostMapping("ContarVisitasPorCarrera")
     public ResponseEntity<?> contarVisitasPorCarreraPorFecha(@RequestBody FechaRequest request) {
 
         List<Object[]> resultados = repository.countByNombreCarreraAndFechaBetween(request.getFechaInicio(), request.getFechaFinal());
@@ -100,7 +109,7 @@ public class ReportesController {
         return new ResponseEntity<>(carrerasResponse ,HttpStatus.OK);
     }
 
-    @PostMapping("ContarVisitasPorGlobal")
+    @PostMapping("ContarVisitasGlobal")
     public ResponseEntity<?> contarVisitasGlobal(@RequestBody FechaRequest request) {
 
         Long alumnos = alumnoService.visitasAlumno(request.getFechaInicio(), request.getFechaFinal());
@@ -113,7 +122,7 @@ public class ReportesController {
         return new ResponseEntity<>(visitasPorPersonas ,HttpStatus.OK);
     }
 
-    @PostMapping("/ContarVisitasPorAlumnosPorTurno")
+    @PostMapping("/AlumnosPorTurno")
     public ResponseEntity<List<TurnosResponse>> contarVisitasPorAlumnosPorTurno(@RequestBody FechaRequest request) {
         List<TurnosResponse> turnosResponse = new ArrayList<>();
 
@@ -129,7 +138,7 @@ public class ReportesController {
     }
 
 
-    @PostMapping("/ContarVisitasPorAlumnosNivel")
+    @PostMapping("/AlumnosNivel")
     public ResponseEntity<List<NivelResponse>> contarVisitasPorAlumnosNivelX(@RequestBody FechaRequest request){
         List<NivelResponse> carreraResponses = new ArrayList<>();
         Long a = repository.countByTurnoWhereTsuAndFechaBetween(request.getFechaInicio(), request.getFechaFinal());
@@ -146,16 +155,16 @@ public class ReportesController {
         return ResponseEntity.ok(carreraResponses);
     }
 
-    @PostMapping("/ContarVisitasPorAlumnosExpesifica")
-    public ResponseEntity<List<Alumnovisita>> ContarVisitasPorAlumnosExpesifica(String turno, String carrera){
+    @PostMapping("/FiltroDeAlumnos")
+    public ResponseEntity<List<Alumnovisita>> FiltroDeAlumnos(String turno, String carrera){
         List<Alumnovisita> alumnovisitas = new ArrayList<>();
         alumnovisitas = repository.findByGradoTurnoCarrera(turno, carrera);
 
         return new ResponseEntity<>(alumnovisitas ,HttpStatus.OK);
     }
 // Reporte de Externo
-    @PostMapping("/ContarVisitasPorExternoArea")
-    public ResponseEntity<List<ExternoRespose>> ContarVisitasPorExternoArea(@RequestBody FechaRequest request){
+    @PostMapping("/ContarVisExArea")
+    public ResponseEntity<List<ExternoRespose>> ContarVisExArea(@RequestBody FechaRequest request){
         List<Object[]> resultList = externoRepository.countByOpcion(request.getFechaInicio(), request.getFechaFinal());
         List<ExternoRespose> list = new ArrayList<>();
         long total = 0L;
@@ -182,7 +191,7 @@ public class ReportesController {
         System.out.println("Total de visitas: " + externoResposeTotales);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-    @PostMapping("/ContarVisitasPorExternoInstitucion")
+    @PostMapping("/ContarVisExInstitucion")
     public ResponseEntity<List<ExternoRespose>> ContarVisitasPorExternoInstitucion(@RequestBody FechaRequest request) {
         List<Object[]> resultList = externoRepository.countByNombreInstitucion(request.getFechaInicio(), request.getFechaFinal());
         List<ExternoRespose> list = new ArrayList<>();
@@ -213,10 +222,9 @@ public class ReportesController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 // Reportes de divicion
-@PostMapping("/ContarVisitasPorDivisiones")
+@PostMapping("/MostrarCarreras")
 public ResponseEntity<List<CarrerasCgut>> ContarVisitasPorDivisiones(byte a) {
     List<CarrerasCgut> list = carrerasCgutRepository.findByActivo(a);
-
 
     return new ResponseEntity<>(list, HttpStatus.OK);
 }
