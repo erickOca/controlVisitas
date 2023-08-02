@@ -2,30 +2,23 @@ package utrng.control.visitas.controller.mySqlController;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utrng.control.visitas.model.entity.mysql.Alumnovisita;
-import utrng.control.visitas.model.entity.sqlserver.Alumno;
 import utrng.control.visitas.model.entity.sqlserver.CarrerasCgut;
-import utrng.control.visitas.model.entity.sqlserver.Persona;
-import utrng.control.visitas.model.entity.sqlserver.Turno;
 import utrng.control.visitas.model.repository.mysqlRepository.AlumnoVisitaRepository;
 import utrng.control.visitas.model.repository.mysqlRepository.EmpleadoRepository;
 import utrng.control.visitas.model.repository.mysqlRepository.ExternoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.AlumnoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.CarrerasCgutRepository;
 import utrng.control.visitas.model.repository.sqlRepository.PersonaRepository;
-import utrng.control.visitas.service.mySqlService.IngresosEmpleadoServiceImpl;
+import utrng.control.visitas.service.mySqlService.EmpleadoVisitaServiceImpl;
 import utrng.control.visitas.service.sqlService.AlumnoServiceImpl;
 import utrng.control.visitas.service.sqlService.VisitasPorCarreraService;
 import utrng.control.visitas.util.FechaRequest;
 import utrng.control.visitas.util.response.*;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 
 @RestController
@@ -49,7 +42,7 @@ public class ReportesController {
     private AlumnoServiceImpl alumnoService;
 
     @Autowired
-    private IngresosEmpleadoServiceImpl ingresosEmpleadoService;
+    private EmpleadoVisitaServiceImpl ingresosEmpleadoService;
 
     @Autowired
     private AlumnoRepository alumnoRepository;

@@ -1,9 +1,8 @@
 package utrng.control.visitas.service.mySqlService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
-import utrng.control.visitas.model.entity.mysql.Externovisita;
+import utrng.control.visitas.model.entity.mysql.ExternoVisita;
 import utrng.control.visitas.model.repository.mysqlRepository.ExternoRepository;
 import utrng.control.visitas.util.ExternoRequest;
 import utrng.control.visitas.util.response.ExternoRespose;
@@ -19,9 +18,9 @@ public class ExternoServiceImpl implements ExternoService{
     private ExternoRepository externoRepository;
 
     @Override
-    public Externovisita saveExterno(ExternoRequest request) {
+    public ExternoVisita saveExterno(ExternoRequest request) {
 
-    Externovisita externo = new Externovisita();
+    ExternoVisita externo = new ExternoVisita();
     Date fecha = new Date();
 
     externo.setNombreInstitucion(request.getNombreInstitucion());
@@ -33,7 +32,7 @@ public class ExternoServiceImpl implements ExternoService{
     }
 
     @Override
-    public Externovisita findAllInstitucion() {
+    public ExternoVisita findAllInstitucion() {
         return null;
     }
 

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "empleadovisita")
-public class Empleadovisita {
+public class EmpleadoVisita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idIngreso",nullable = false)
@@ -26,10 +26,10 @@ public class Empleadovisita {
 
     // Constructor, getters y setters
 
-    public Empleadovisita() {
+    public EmpleadoVisita() {
     }
 
-    public Empleadovisita(Empleado empleado, Timestamp horaEntrada, String areaVisitada, String motivo) {
+    public EmpleadoVisita(Empleado empleado, Timestamp horaEntrada, String areaVisitada, String motivo) {
         this.empleado = empleado;
         this.horaEntrada = horaEntrada;
         this.areaVisitada = areaVisitada;

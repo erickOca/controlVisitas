@@ -2,17 +2,17 @@ package utrng.control.visitas.service.mySqlService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import utrng.control.visitas.model.repository.mysqlRepository.IngresosEmpleadoRepository;
+import utrng.control.visitas.model.repository.mysqlRepository.EmpleadoVisitaRepository;
 import utrng.control.visitas.util.EntradaRequest;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
 @Service
-public class IngresosEmpleadoServiceImpl implements IngresosEmpleadoService{
+public class EmpleadoVisitaServiceImpl implements EmpleadoVisitaService {
 
     @Autowired
-    IngresosEmpleadoRepository ingresosEmpleadoRepository;
+    EmpleadoVisitaRepository ingresosEmpleadoRepository;
     @Override
     public void registroEntraEmpleado(EntradaRequest request) {
       /*   if (notnull(request.getIdEmpleado(),request.getFechaEntrada(),request.getAreaVisitada())){

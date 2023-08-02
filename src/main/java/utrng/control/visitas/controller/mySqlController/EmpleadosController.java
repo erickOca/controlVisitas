@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import utrng.control.visitas.model.entity.mysql.Empleado;
 import utrng.control.visitas.model.repository.mysqlRepository.EmpleadoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.PersonaRepository;
-import utrng.control.visitas.service.mySqlService.IngresosEmpleadoService;
+import utrng.control.visitas.service.mySqlService.EmpleadoVisitaService;
 import utrng.control.visitas.util.EmpleadoRequest;
 import utrng.control.visitas.util.EntradaRequest;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class EmpleadosController {
 
     @Autowired
-    IngresosEmpleadoService ingresosEmpleadoService;
+    EmpleadoVisitaService ingresosEmpleadoService;
 
     @Autowired
     PersonaRepository personaRepository;
