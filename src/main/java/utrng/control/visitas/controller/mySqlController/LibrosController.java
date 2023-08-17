@@ -25,13 +25,13 @@ public class LibrosController {
     @Autowired
     private LibroService libroService;
 
-    @GetMapping("/ListLibro")
+    @GetMapping("/listLibro")
     public ResponseEntity<List<Libro>> todosLosLibros() {
         List<Libro> libros = libroService.todosLosLibros();
 
         return new ResponseEntity<>(libros, HttpStatus.OK);
     }
-    @PostMapping("/nuevoLibro")
+    @PostMapping("/nuevolibro")
     public ResponseEntity<Libro> nuevoLibro(@RequestBody LibrosRequest librosRequest){
        Libro nuevoLibro = libroService.nuevoLibro(librosRequest);
 
@@ -45,7 +45,7 @@ public class LibrosController {
         return new ResponseEntity<>(optionalLibro, HttpStatus.OK);
 
     }
-    @PutMapping("/actualizarLibro")
+    @PutMapping("/actualizarlibro")
     public ResponseEntity<Libro> actualizarLibro( int idLibro, @RequestBody LibrosRequest request){
         Libro libro = libroService.actualizarLibro(idLibro, request);
 
