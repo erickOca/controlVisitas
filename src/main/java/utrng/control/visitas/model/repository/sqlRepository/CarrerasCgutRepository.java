@@ -9,6 +9,6 @@ import java.util.List;
 public interface CarrerasCgutRepository extends JpaRepository<CarrerasCgut,Integer > {
 
     CarrerasCgut findByNombre(String nombre);
-    List<CarrerasCgut> findByActivo(byte a);
+    List<CarrerasCgut> findAll();
 
 }

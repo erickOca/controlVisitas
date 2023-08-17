@@ -56,5 +56,14 @@ public class AlumnoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping("/alumnos/{matricula}")
+    public ResponseEntity<Object> getAlumnoByMatricula(@PathVariable String matricula) {
+        Alumno alumno = alumnoService.findByAlumno(matricula);
 
+        if (alumno == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(alumno);
+    }
 }

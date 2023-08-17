@@ -55,11 +55,11 @@ public class ReportesController {
     @GetMapping("ContarVisitasPorArea")
     public ResponseEntity<?> contarVisitasPorArea() {
         // Alumnos
-        Long visitasComputo = repository.countByOpcion("Area de computo");
-        Long visitasLibros = repository.countByOpcion("Area de libros");
+        Long visitasComputo = repository.countByOpcion("Area de Computo");
+        Long visitasLibros = repository.countByOpcion("Area de Biblioteca");
         // Externo
-        Long visitasComputoExternos = externoRepository.countByOpcion("Area de computo");
-        Long visitasLibrosExternos = externoRepository.countByOpcion("Area de libros");
+        Long visitasComputoExternos = externoRepository.countByOpcion("Area de Computo");
+        Long visitasLibrosExternos = externoRepository.countByOpcion("Area de Biblioteca");
 
 
         Long totalComputo = visitasComputo + visitasComputoExternos;
@@ -212,9 +212,9 @@ public class ReportesController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 // Reportes de divicion
-@PostMapping("/MostrarCarreras")
-public ResponseEntity<List<CarrerasCgut>> ContarVisitasPorDivisiones(byte a) {
-    List<CarrerasCgut> list = carrerasCgutRepository.findByActivo(a);
+@GetMapping("/MostrarCarreras")
+public ResponseEntity<List<CarrerasCgut>> ContarVisitasPorDivisiones() {
+    List<CarrerasCgut> list = carrerasCgutRepository.findAll();
 
     return new ResponseEntity<>(list, HttpStatus.OK);
 }
