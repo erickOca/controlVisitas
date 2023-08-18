@@ -12,7 +12,7 @@ public interface LibroService {
 
     public List<Libro> todosLosLibros();
 
-    public Libro actualizarLibro(int idLibro, LibrosRequest request);
+    public Libro actualizarLibro(int idLibro,byte status, LibrosRequest request);
 
     public Optional<Libro> borrarLibro(int idLibro);
 }

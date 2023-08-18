@@ -23,17 +23,21 @@ public class Libro {
     @Column(name = "categoria")
     private String categoria;
 
+    @Column(name = "status")
+    private byte status;
+
     // Getters y setters
 
 
     public Libro() {
     }
 
-    public Libro( String titulo, LocalDate fechaIngreso, String autor, String categoria) {
+    public Libro(String titulo, LocalDate fechaIngreso, String autor, String categoria, byte status) {
         this.titulo = titulo;
         this.fechaIngreso = fechaIngreso;
         this.autor = autor;
         this.categoria = categoria;
+        this.status = status;
     }
 
     public int getIdLibro() {
@@ -74,6 +78,14 @@ public class Libro {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(byte status) {
+        this.status = status;
     }
 }
 

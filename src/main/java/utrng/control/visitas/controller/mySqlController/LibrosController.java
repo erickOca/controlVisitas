@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Libro")
+@RequestMapping("/libro")
 @CrossOrigin(origins = "*")
 public class LibrosController {
 
@@ -46,8 +46,8 @@ public class LibrosController {
 
     }
     @PutMapping("/actualizarlibro")
-    public ResponseEntity<Libro> actualizarLibro( int idLibro, @RequestBody LibrosRequest request){
-        Libro libro = libroService.actualizarLibro(idLibro, request);
+    public ResponseEntity<Libro> actualizarLibro( int idLibro,byte status, @RequestBody LibrosRequest request){
+        Libro libro = libroService.actualizarLibro(idLibro, status, request);
 
         return new ResponseEntity<>(libro, HttpStatus.OK);
 

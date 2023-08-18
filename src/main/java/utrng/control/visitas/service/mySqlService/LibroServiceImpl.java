@@ -17,7 +17,8 @@ public class LibroServiceImpl implements LibroService{
 
     @Override
     public Libro nuevoLibro(LibrosRequest request) {
-        Libro libro = new Libro(request.getTitulo(), request.getFechaIngreso(), request.getAutor(), request.getCategoria());
+        byte b = 1;
+        Libro libro = new Libro(request.getTitulo(), request.getFechaIngreso(), request.getAutor(), request.getCategoria(),b);
         libroRepository.save(libro);
         return libro;
     }
@@ -29,7 +30,7 @@ public class LibroServiceImpl implements LibroService{
         return libros;
     }
     @Override
-    public Libro actualizarLibro(int idLibro, LibrosRequest request) {
+    public Libro actualizarLibro(int idLibro,byte status, LibrosRequest request) {
         Optional<Libro> optionalLibro = libroRepository.findById(idLibro);
         Libro libro = new Libro();
 
@@ -39,7 +40,7 @@ public class LibroServiceImpl implements LibroService{
             libro.setFechaIngreso(request.getFechaIngreso());
             libro.setAutor(request.getAutor());
             libro.setCategoria(request.getCategoria());
-
+            libro.setStatus(status);
             libroRepository.save(libro);
 
         } else {
