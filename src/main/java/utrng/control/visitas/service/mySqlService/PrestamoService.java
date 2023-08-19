@@ -13,7 +13,7 @@ public interface PrestamoService {
 
     public List<Prestamo> buscarPorMatricula(String Matricula);
 
-    public Prestamo devolucionDePrestamo(int idPrestamo, LocalDate fechaDevolucion);
+    public Prestamo devolucionDePrestamo(int idPrestamo);
 
     public List<Prestamo> todosLosPrestamosPorDevolver();
 

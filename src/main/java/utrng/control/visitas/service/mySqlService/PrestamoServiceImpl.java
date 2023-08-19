@@ -12,6 +12,7 @@ import utrng.control.visitas.util.PrestamoRequest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,7 @@ public class PrestamoServiceImpl implements PrestamoService {
     public Prestamo nuevoPrestamo(PrestamoRequest prestamoRequest) {
         Libro libro = libroRepository.findById(prestamoRequest.getIdLibro()).orElse(null);
         Alumno alumno = alumnoRepository.findAlumnoByMatricula(prestamoRequest.getMatriculaEst());
-
+        byte status = 2;
         if (libro == null) {
             throw new IllegalArgumentException("Libro no encontrado");
         }
@@ -47,11 +48,13 @@ public class PrestamoServiceImpl implements PrestamoService {
             Prestamo prestamo = new Prestamo();
             prestamo.setFechaPrestamo(LocalDate.now()); // Establecer la fecha actual
             prestamo.setLibro(libro);
-
+            libro.setStatus(status);
             if (alumno != null) {
                 prestamo.setMatriculaEst(prestamoRequest.getMatriculaEst());
+                libroRepository.save(libro);
             } else if (prestamoRequest.getNombreEmpleado() != null) {
                 prestamo.setNombreEmpleado(prestamo.getNombreEmpleado());
+                libroRepository.save(libro);
             }
 
             prestamoRepository.save(prestamo);
@@ -79,16 +82,18 @@ public class PrestamoServiceImpl implements PrestamoService {
     }
 
     @Override
-    public Prestamo devolucionDePrestamo(int idPrestamo, LocalDate fechaDevolucion) {
+    public Prestamo devolucionDePrestamo(int idPrestamo) {
         Optional<Prestamo> optionalPrestamo = prestamoRepository.findById(idPrestamo);
-
+        LocalDate fechaDevolucion = LocalDate.now(); // Obtén la fecha actual
         if (optionalPrestamo.isPresent()) {
             Prestamo prestamo = optionalPrestamo.get();
             prestamo.setFechaDevolucion(fechaDevolucion);
 
-            // Realizar otras acciones necesarias
+            Libro libro = prestamo.getLibro(); // Obtiene el libro del préstamo
+            libro.setStatus((byte) 1); // Actualiza el estado del libro (supongo que 1 representa "devuelto")
 
             prestamoRepository.save(prestamo);
+            libroRepository.save(libro);
 
             return prestamo;
         } else {
@@ -96,6 +101,7 @@ public class PrestamoServiceImpl implements PrestamoService {
             throw new IllegalArgumentException("No se encontró ningún préstamo con el ID proporcionado.");
         }
     }
+
 
     @Override
     public List<Prestamo> todosLosPrestamosPorDevolver() {

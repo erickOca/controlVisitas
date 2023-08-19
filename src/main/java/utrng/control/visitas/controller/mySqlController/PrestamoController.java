@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import utrng.control.visitas.model.entity.mysql.Prestamo;
 import utrng.control.visitas.service.mySqlService.PrestamoService;
 import utrng.control.visitas.util.PrestamoRequest;
-import utrng.control.visitas.util.DevolucionRequest;
 
 import java.util.List;
 
@@ -41,8 +40,8 @@ public class PrestamoController {
     }
 
     @PutMapping("/devoluciondeprestamo")
-    public  ResponseEntity<Prestamo> devolucionDePrestamo(@RequestBody DevolucionRequest devolucionRequest){
-        Prestamo prestamo = prestamoService.devolucionDePrestamo(devolucionRequest.getIdPrestamo(), devolucionRequest.getFechaDevolucion());
+    public  ResponseEntity<Prestamo> devolucionDePrestamo(int idPrestamo){
+        Prestamo prestamo = prestamoService.devolucionDePrestamo(idPrestamo);
 
         return new ResponseEntity<>(prestamo, HttpStatus.OK);
     }
