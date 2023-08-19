@@ -2,11 +2,9 @@ package utrng.control.visitas.service.mySqlService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import utrng.control.visitas.model.entity.mysql.Empleado;
 import utrng.control.visitas.model.entity.mysql.Libro;
 import utrng.control.visitas.model.entity.mysql.Prestamo;
 import utrng.control.visitas.model.entity.sqlserver.Alumno;
-import utrng.control.visitas.model.repository.mysqlRepository.EmpleadoRepository;
 import utrng.control.visitas.model.repository.mysqlRepository.LibroRepository;
 import utrng.control.visitas.model.repository.mysqlRepository.PrestamoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.AlumnoRepository;
@@ -27,9 +25,6 @@ public class PrestamoServiceImpl implements PrestamoService {
     AlumnoRepository alumnoRepository;
 
     @Autowired
-    EmpleadoRepository empleadoRepository;
-
-    @Autowired
     LibroRepository libroRepository;
 
     @Override
@@ -42,22 +37,21 @@ public class PrestamoServiceImpl implements PrestamoService {
     @Override
     public Prestamo nuevoPrestamo(PrestamoRequest prestamoRequest) {
         Libro libro = libroRepository.findById(prestamoRequest.getIdLibro()).orElse(null);
-        Empleado empleado = empleadoRepository.findByNumEmpleado(prestamoRequest.getNumEmpleado());
         Alumno alumno = alumnoRepository.findAlumnoByMatricula(prestamoRequest.getMatriculaEst());
 
         if (libro == null) {
             throw new IllegalArgumentException("Libro no encontrado");
         }
 
-        if (alumno != null || empleado != null) {
+        if (alumno != null || prestamoRequest.getNombreEmpleado() != null) {
             Prestamo prestamo = new Prestamo();
             prestamo.setFechaPrestamo(LocalDate.now()); // Establecer la fecha actual
             prestamo.setLibro(libro);
 
             if (alumno != null) {
                 prestamo.setMatriculaEst(prestamoRequest.getMatriculaEst());
-            } else if (empleado != null) {
-                prestamo.setEmpleado(empleado);
+            } else if (prestamoRequest.getNombreEmpleado() != null) {
+                prestamo.setNombreEmpleado(prestamo.getNombreEmpleado());
             }
 
             prestamoRepository.save(prestamo);
@@ -116,8 +110,8 @@ public class PrestamoServiceImpl implements PrestamoService {
     }
 
     @Override
-    public List<Prestamo> buscarPorNumEmpleado(String numEmpleado) {
-        List<Prestamo> prestamoList = prestamoRepository.findByEmpleado_NumEmpleado(numEmpleado);
+    public List<Prestamo> buscarPorNumEmpleado(String nombreEmpleado) {
+        List<Prestamo> prestamoList = prestamoRepository.findByNombreEmpleado(nombreEmpleado);
 
         return prestamoList;
     }

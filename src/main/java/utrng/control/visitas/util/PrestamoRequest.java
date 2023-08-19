@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class PrestamoRequest {
     private String matriculaEst;
     private int idLibro;
-    private String numEmpleado;
+    private String nombreEmpleado;
 
     // Constructor, getters y setters
 
@@ -26,11 +26,11 @@ public class PrestamoRequest {
         this.idLibro = idLibro;
     }
 
-    public String getNumEmpleado() {
-        return numEmpleado;
+    public String getNombreEmpleado() {
+        return nombreEmpleado;
     }
 
-    public void setNumEmpleado(String numEmpleado) {
-        this.numEmpleado = numEmpleado;
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
     }
 }

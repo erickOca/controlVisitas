@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import utrng.control.visitas.model.entity.mysql.Alumnovisita;
 import utrng.control.visitas.model.entity.sqlserver.CarrerasCgut;
 import utrng.control.visitas.model.repository.mysqlRepository.AlumnoVisitaRepository;
-import utrng.control.visitas.model.repository.mysqlRepository.EmpleadoRepository;
-import utrng.control.visitas.model.repository.mysqlRepository.EmpleadoVisitaRepository;
 import utrng.control.visitas.model.repository.mysqlRepository.ExternoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.AlumnoRepository;
 import utrng.control.visitas.model.repository.sqlRepository.CarrerasCgutRepository;

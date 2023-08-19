@@ -1,46 +1,70 @@
 package utrng.control.visitas.util;
 
+import java.util.Date;
+
 public class EmpleadoRequest {
-    String numEmpleado;
 
-    String nombre;
+    private String nombres;
+    private String apellidos;
+    private Date horaEntrada;
+    private String areaVisitada;
+    private String motivo;
+    private String area;
 
-    String puesto;
-
-    String area;
-
+    // Constructor vacío (necesario para deserialización)
     public EmpleadoRequest() {
     }
 
-    public EmpleadoRequest(String numEmpleado, String nombre, String puesto, String area) {
-        this.numEmpleado = numEmpleado;
-        this.nombre = nombre;
-        this.puesto = puesto;
+    // Constructor con parámetros
+    public EmpleadoRequest(String nombres, String apellidos, Date horaEntrada,
+                                 String areaVisitada, String motivo, String area) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.horaEntrada = horaEntrada;
+        this.areaVisitada = areaVisitada;
+        this.motivo = motivo;
         this.area = area;
     }
 
-    public String getNumEmpleado() {
-        return numEmpleado;
+    // Getters y setters
+    public String getNombres() {
+        return nombres;
     }
 
-    public void setNumEmpleado(String numEmpleado) {
-        this.numEmpleado = numEmpleado;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public String getPuesto() {
-        return puesto;
+    public Date getHoraEntrada() {
+        return horaEntrada;
     }
 
-    public void setPuesto(String puesto) {
-        this.puesto = puesto;
+    public void setHoraEntrada(Date horaEntrada) {
+        this.horaEntrada = horaEntrada;
+    }
+
+    public String getAreaVisitada() {
+        return areaVisitada;
+    }
+
+    public void setAreaVisitada(String areaVisitada) {
+        this.areaVisitada = areaVisitada;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
     }
 
     public String getArea() {
@@ -51,3 +75,4 @@ public class EmpleadoRequest {
         this.area = area;
     }
 }
+

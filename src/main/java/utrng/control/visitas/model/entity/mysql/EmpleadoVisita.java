@@ -1,55 +1,79 @@
 package utrng.control.visitas.model.entity.mysql;
-
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
 @Table(name = "empleadovisita")
 public class EmpleadoVisita {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idIngreso",nullable = false)
-    private int id;
+    @Column(name = "idIngreso")
+    private int idIngreso;
 
-    @ManyToOne
-    @JoinColumn(name = "numEmpleado", referencedColumnName = "numEmpleado", nullable = false)
-    private Empleado empleado;
+    @Column(name = "nombres", nullable = false)
+    private String nombres;
 
-    @Column(name = "hora_entrada",nullable = false)
+    @Column(name = "apellidos", nullable = false)
+    private String apellidos;
+
+    @Column(name = "hora_entrada", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date horaEntrada;
 
-    @Column(name = "area_visitada",nullable = false)
+    @Column(name = "opcion")
     private String areaVisitada;
 
-    @Column(name = "motivo",nullable = false)
+    @Column(name = "motivo")
     private String motivo;
 
-    // Constructor, getters y setters
+    @Column(name = "area")
+    private String area;
+
+    // Constructor, getters, setters, y otros métodos
+
 
     public EmpleadoVisita() {
     }
 
-    public EmpleadoVisita(Empleado empleado, Date horaEntrada, String areaVisitada, String motivo) {
-        this.empleado = empleado;
+    public EmpleadoVisita(String nombres, String apellidos, Date horaEntrada, String areaVisitada, String motivo, String area) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
         this.horaEntrada = horaEntrada;
         this.areaVisitada = areaVisitada;
         this.motivo = motivo;
+        this.area = area;
     }
 
-    public int getId() {
-        return id;
+    public int getIdIngreso() {
+        return idIngreso;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdIngreso(int idIngreso) {
+        this.idIngreso = idIngreso;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public Date getHoraEntrada() {
         return horaEntrada;
     }
 
-    public void setHoraEntrada(Timestamp horaEntrada) {
+    public void setHoraEntrada(Date horaEntrada) {
         this.horaEntrada = horaEntrada;
     }
 
@@ -61,15 +85,19 @@ public class EmpleadoVisita {
         this.areaVisitada = areaVisitada;
     }
 
-    // Otros métodos si los necesitas
+    public String getMotivo() {
+        return motivo;
+    }
 
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
 
-    @Override
-    public String toString() {
-        return "Ingreso Empleado{" +
-                "idEmpleado=" + empleado +
-                ", horaEntrada=" + horaEntrada +
-                ", areaVisitada='" + areaVisitada + '\'' +
-                '}';
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

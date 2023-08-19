@@ -24,9 +24,8 @@ public class Prestamo {
     @JoinColumn(name = "idLibro")
     private Libro libro;
 
-    @ManyToOne
-    @JoinColumn(name = "numEmpleado")
-    private Empleado empleado;
+    @Column(name = "nombreEmpleado")
+    private String nombreEmpleado;
 
     // Getters y setters
 
@@ -34,12 +33,12 @@ public class Prestamo {
     public Prestamo() {
     }
 
-    public Prestamo(String matriculaEst, LocalDate fechaPrestamo, LocalDate fechaDevolucion, Libro libro, Empleado empleado) {
+    public Prestamo(String matriculaEst, LocalDate fechaPrestamo, LocalDate fechaDevolucion, Libro libro, String nombreEmpleado) {
         this.matriculaEst = matriculaEst;
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
         this.libro = libro;
-        this.empleado = empleado;
+        this.nombreEmpleado = nombreEmpleado;
     }
 
     public int getIdPrestamo() {
@@ -82,11 +81,11 @@ public class Prestamo {
         this.libro = libro;
     }
 
-    public Empleado getEmpleado() {
-        return empleado;
+    public String getNombreEmpleado() {
+        return nombreEmpleado;
     }
 
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
     }
 }

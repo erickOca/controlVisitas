@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class EntradaRequest {
-    String numEmpleado;
+
 
     String areaVisitada;
 
@@ -31,11 +31,4 @@ public class EntradaRequest {
         this.motivo = motivo;
     }
 
-    public String getNumEmpleado() {
-        return numEmpleado;
-    }
-
-    public void setNumEmpleado(String numEmpleado) {
-        this.numEmpleado = numEmpleado;
-    }
 }
