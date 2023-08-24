@@ -216,7 +216,12 @@ public ResponseEntity<List<CarrerasCgut>> ContarVisitasPorDivisiones() {
 
     return new ResponseEntity<>(list, HttpStatus.OK);
 }
+    @PostMapping("/ContarPersonalArea")
+    public ResponseEntity<List<AreaPersonalResponse>> contarPersonalArea(@RequestBody FechaRequest request) {
+        List<AreaPersonalResponse> areaPerdonalResponses =ingresosEmpleadoService.contarPersonalArea(request.getFechaInicio(), request.getFechaFinal());
 
+        return new ResponseEntity<>(areaPerdonalResponses, HttpStatus.OK);
+    }
 
 
 
