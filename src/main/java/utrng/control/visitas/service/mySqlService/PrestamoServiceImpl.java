@@ -51,11 +51,14 @@ public class PrestamoServiceImpl implements PrestamoService {
         prestamo.setNombre(prestamoRequest.getNombre());
         prestamo.setMatriculaEst(prestamoRequest.getMatriculaEst());
         prestamo.setFechaPrestamo(LocalDate.now());
+
+        // Calculate return date as 15 days after the loan issuance
+        prestamo.setFechaDevolucion(prestamo.getFechaPrestamo().plusDays(15));
+
         prestamo.setLibro(libro);
         prestamo.setEmpleadoPresta(prestamoRequest.getEmpleadoPresta());
 
         return prestamoRepository.save(prestamo);
-
     }
 
 
