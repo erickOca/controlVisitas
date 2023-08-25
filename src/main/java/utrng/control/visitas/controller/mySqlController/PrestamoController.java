@@ -26,12 +26,14 @@ public class PrestamoController {
     }
 
     @PostMapping("/nuevoprestamo")
-    public ResponseEntity<Prestamo> nuevoPrestamo(@RequestBody PrestamoRequest prestamoRequest){
-        Prestamo prestamo = prestamoService.nuevoPrestamo(prestamoRequest);
-
-        return new ResponseEntity<>(prestamo, HttpStatus.OK);
+    public ResponseEntity<?> nuevoPrestamo(@RequestBody PrestamoRequest prestamoRequest) {
+        try {
+            Prestamo prestamo = prestamoService.nuevoPrestamo(prestamoRequest);
+            return new ResponseEntity<>(prestamo, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Book is not available for loan");
+        }
     }
-
     @GetMapping("/buscarpormatricula")
     public ResponseEntity<List<Prestamo>> buscarPorMatricula(String matricula){
         List<Prestamo> prestamos = prestamoService.buscarPorMatricula(matricula);
