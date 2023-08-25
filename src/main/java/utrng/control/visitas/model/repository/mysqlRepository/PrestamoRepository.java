@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface PrestamoRepository extends JpaRepository<Prestamo,Integer> {
 
-    List<Prestamo> findByNombreEmpleado(String nombreEmpleado);
+    List<Prestamo> findByNombre(String nombreEmpleado);
 
     @Query("SELECT p FROM Prestamo p WHERE p.matriculaEst = :matricula")
     List<Prestamo> findByMatriculaEst(@Param("matricula") String matricula);

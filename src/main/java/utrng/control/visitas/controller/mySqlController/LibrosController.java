@@ -53,4 +53,9 @@ public class LibrosController {
 
     }
 
+    @GetMapping("/buscar-libros")
+    public Libro buscarLibrosPorNombre(@RequestParam String nombre) {
+        return libroService.buscarLibrosPorNombre(nombre);
+    }
+
 }

@@ -4,11 +4,12 @@ import java.time.LocalDate;
 
 public class PrestamoRequest {
     private String matriculaEst;
-    private int idLibro;
-    private String nombreEmpleado;
+    private String tituloLibro;
+    private String empleadoPresta;
+
+    private String nombre;
 
     // Constructor, getters y setters
-
 
     public String getMatriculaEst() {
         return matriculaEst;
@@ -18,19 +19,27 @@ public class PrestamoRequest {
         this.matriculaEst = matriculaEst;
     }
 
-    public int getIdLibro() {
-        return idLibro;
+    public String getEmpleadoPresta() {
+        return empleadoPresta;
     }
 
-    public void setIdLibro(int idLibro) {
-        this.idLibro = idLibro;
+    public void setEmpleadoPresta(String empleadoPresta) {
+        this.empleadoPresta = empleadoPresta;
     }
 
-    public String getNombreEmpleado() {
-        return nombreEmpleado;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreEmpleado(String nombreEmpleado) {
-        this.nombreEmpleado = nombreEmpleado;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getTituloLibro() {
+        return tituloLibro;
+    }
+
+    public void setTituloLibro(String tituloLibro) {
+        this.tituloLibro = tituloLibro;
     }
 }

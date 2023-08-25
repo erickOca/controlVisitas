@@ -2,14 +2,16 @@ package utrng.control.visitas.model.entity.mysql;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
 @Entity
 @Table(name = "prestamo")
 public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPrestamo")
-    private int idPrestamo;
+    private Long idPrestamo;
+
+    @Column(name = "nombre")
+    private String nombre;
 
     @Column(name = "matriculaEst")
     private String matriculaEst;
@@ -24,29 +26,38 @@ public class Prestamo {
     @JoinColumn(name = "idLibro")
     private Libro libro;
 
-    @Column(name = "nombreEmpleado")
-    private String nombreEmpleado;
+    @Column(name = "empleadoPresta")
+    private String empleadoPresta;
 
     // Getters y setters
-
 
     public Prestamo() {
     }
 
-    public Prestamo(String matriculaEst, LocalDate fechaPrestamo, LocalDate fechaDevolucion, Libro libro, String nombreEmpleado) {
+    public Prestamo(Long idPrestamo, String nombre, String matriculaEst, LocalDate fechaPrestamo, LocalDate fechaDevolucion, Libro libro, String empleadoPresta) {
+        this.idPrestamo = idPrestamo;
+        this.nombre = nombre;
         this.matriculaEst = matriculaEst;
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
         this.libro = libro;
-        this.nombreEmpleado = nombreEmpleado;
+        this.empleadoPresta = empleadoPresta;
     }
 
-    public int getIdPrestamo() {
+    public Long getIdPrestamo() {
         return idPrestamo;
     }
 
-    public void setIdPrestamo(int idPrestamo) {
+    public void setIdPrestamo(Long idPrestamo) {
         this.idPrestamo = idPrestamo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getMatriculaEst() {
@@ -81,11 +92,11 @@ public class Prestamo {
         this.libro = libro;
     }
 
-    public String getNombreEmpleado() {
-        return nombreEmpleado;
+    public String getEmpleadoPresta() {
+        return empleadoPresta;
     }
 
-    public void setNombreEmpleado(String nombreEmpleado) {
-        this.nombreEmpleado = nombreEmpleado;
+    public void setEmpleadoPresta(String empleadoPresta) {
+        this.empleadoPresta = empleadoPresta;
     }
 }

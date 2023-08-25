@@ -62,5 +62,10 @@ public class LibroServiceImpl implements LibroService{
         return optionalLibro;
     }
 
+    @Override
+    public Libro buscarLibrosPorNombre(String nombre) {
+        return libroRepository.findByTitulo(nombre);
+    }
+
 
 }

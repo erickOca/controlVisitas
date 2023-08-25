@@ -10,6 +10,7 @@ import utrng.control.visitas.model.repository.mysqlRepository.PrestamoRepository
 import utrng.control.visitas.model.repository.sqlRepository.AlumnoRepository;
 import utrng.control.visitas.util.PrestamoRequest;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,32 +38,26 @@ public class PrestamoServiceImpl implements PrestamoService {
 
     @Override
     public Prestamo nuevoPrestamo(PrestamoRequest prestamoRequest) {
-        Libro libro = libroRepository.findById(prestamoRequest.getIdLibro()).orElse(null);
-        Alumno alumno = alumnoRepository.findAlumnoByMatricula(prestamoRequest.getMatriculaEst());
-        byte status = 0;
-        if (libro == null) {
-            throw new IllegalArgumentException("Libro no encontrado");
+        Libro libro =  libroRepository.findByTitulo(prestamoRequest.getTituloLibro());
+
+        if (libro.getStatus() != 1) {
+            throw new IllegalStateException("Book is not available for loan");
         }
 
-        if (alumno != null || prestamoRequest.getNombreEmpleado() != null) {
-            Prestamo prestamo = new Prestamo();
-            prestamo.setFechaPrestamo(LocalDate.now()); // Establecer la fecha actual
-            prestamo.setLibro(libro);
-            libro.setStatus(status);
-            if (alumno != null) {
-                prestamo.setMatriculaEst(prestamoRequest.getMatriculaEst());
-                libroRepository.save(libro);
-            } else if (prestamoRequest.getNombreEmpleado() != null) {
-                prestamo.setNombreEmpleado(prestamo.getNombreEmpleado());
-                libroRepository.save(libro);
-            }
+        libro.setStatus((byte) 0);
+        libroRepository.save(libro);
 
-            prestamoRepository.save(prestamo);
-            return prestamo;
-        } else {
-            throw new IllegalArgumentException("No se encontró ni alumno ni empleado");
-        }
+        Prestamo prestamo = new Prestamo();
+        prestamo.setNombre(prestamoRequest.getNombre());
+        prestamo.setMatriculaEst(prestamoRequest.getMatriculaEst());
+        prestamo.setFechaPrestamo(LocalDate.now());
+        prestamo.setLibro(libro);
+        prestamo.setEmpleadoPresta(prestamoRequest.getEmpleadoPresta());
+
+        return prestamoRepository.save(prestamo);
+
     }
+
 
     @Override
     public List<Prestamo> buscarPorMatricula(String matricula) {
@@ -117,7 +112,7 @@ public class PrestamoServiceImpl implements PrestamoService {
 
     @Override
     public List<Prestamo> buscarPorNumEmpleado(String nombreEmpleado) {
-        List<Prestamo> prestamoList = prestamoRepository.findByNombreEmpleado(nombreEmpleado);
+        List<Prestamo> prestamoList = prestamoRepository.findByNombre(nombreEmpleado);
 
         return prestamoList;
     }
