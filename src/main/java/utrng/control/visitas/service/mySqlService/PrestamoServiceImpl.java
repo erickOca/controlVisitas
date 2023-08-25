@@ -39,7 +39,7 @@ public class PrestamoServiceImpl implements PrestamoService {
     public Prestamo nuevoPrestamo(PrestamoRequest prestamoRequest) {
         Libro libro = libroRepository.findById(prestamoRequest.getIdLibro()).orElse(null);
         Alumno alumno = alumnoRepository.findAlumnoByMatricula(prestamoRequest.getMatriculaEst());
-        byte status = 2;
+        byte status = 0;
         if (libro == null) {
             throw new IllegalArgumentException("Libro no encontrado");
         }
