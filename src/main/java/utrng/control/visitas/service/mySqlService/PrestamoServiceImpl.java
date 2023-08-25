@@ -2,6 +2,7 @@ package utrng.control.visitas.service.mySqlService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 import utrng.control.visitas.model.entity.mysql.Libro;
 import utrng.control.visitas.model.entity.mysql.Prestamo;
 import utrng.control.visitas.model.entity.sqlserver.Alumno;
@@ -119,5 +120,15 @@ public class PrestamoServiceImpl implements PrestamoService {
 
         return prestamoList;
     }
+    public void eliminarPrestamo(Integer idPrestamo) {
+        Prestamo prestamo = prestamoRepository.findById(idPrestamo)
+                .orElseThrow(() -> new NotFoundException("Prestamo no encontrado"));
 
+        prestamoRepository.delete(prestamo);
+
+        // Cambiar el estado del libro a disponible (status = 1)
+        Libro libro = prestamo.getLibro();
+        libro.setStatus((byte) 1);
+        libroRepository.save(libro);
+    }
 }

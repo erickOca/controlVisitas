@@ -61,5 +61,9 @@ public class PrestamoController {
 
         return new ResponseEntity<>(prestamoList, HttpStatus.OK);
     }
-
+    @DeleteMapping("/eliminar/{idPrestamo}")
+    public ResponseEntity<String> eliminarPrestamo(@PathVariable Integer idPrestamo) {
+        prestamoService.eliminarPrestamo(idPrestamo);
+        return ResponseEntity.ok("Préstamo eliminado exitosamente");
+    }
 }

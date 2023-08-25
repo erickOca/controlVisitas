@@ -8,7 +8,7 @@ public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPrestamo")
-    private Long idPrestamo;
+    private Integer idPrestamo;
 
     @Column(name = "nombre")
     private String nombre;
@@ -34,7 +34,7 @@ public class Prestamo {
     public Prestamo() {
     }
 
-    public Prestamo(Long idPrestamo, String nombre, String matriculaEst, LocalDate fechaPrestamo, LocalDate fechaDevolucion, Libro libro, String empleadoPresta) {
+    public Prestamo(Integer idPrestamo, String nombre, String matriculaEst, LocalDate fechaPrestamo, LocalDate fechaDevolucion, Libro libro, String empleadoPresta) {
         this.idPrestamo = idPrestamo;
         this.nombre = nombre;
         this.matriculaEst = matriculaEst;
@@ -44,11 +44,11 @@ public class Prestamo {
         this.empleadoPresta = empleadoPresta;
     }
 
-    public Long getIdPrestamo() {
+    public Integer getIdPrestamo() {
         return idPrestamo;
     }
 
-    public void setIdPrestamo(Long idPrestamo) {
+    public void setIdPrestamo(Integer idPrestamo) {
         this.idPrestamo = idPrestamo;
     }
 

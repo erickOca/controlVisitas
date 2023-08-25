@@ -18,4 +18,5 @@ public interface PrestamoService {
     public List<Prestamo> todosLosPrestamosPorDevolver();
 
     public List<Prestamo> buscarPorNumEmpleado(String numEmpleado);
+    public void eliminarPrestamo(Integer idPrestamo);
 }
